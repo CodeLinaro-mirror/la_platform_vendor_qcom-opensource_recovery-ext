@@ -34,6 +34,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/mman.h>
+
+#ifdef _GENERIC_KERNEL_HEADERS
+int decrypt_image(const char *src_file, const char *dst_file){ return -1;}
+#else
+
 #include <linux/qseecom.h>
 #include <linux/msm_ion.h>
 
@@ -468,6 +473,10 @@ int decrypt_image(const char *src_file, const char *dst_file)
         goto exit;
     #endif
 
+    if (ionbuf.buffer == NULL) {
+         goto exit;
+    }
+
     read = fread(ionbuf.buffer, fsize, 1, file);
     if (read != 1) {
         fprintf(stderr, "Failed to read %s (%s)\n", src_file, strerror(errno));
@@ -517,3 +526,4 @@ exit:
 
     return ret;
 }
+#endif
