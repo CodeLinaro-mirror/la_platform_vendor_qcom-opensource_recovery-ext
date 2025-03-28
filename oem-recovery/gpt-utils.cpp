@@ -244,6 +244,11 @@ static int gpt_boot_chain_swap(const uint8_t *pentries_start,
         //Skip the xbl, multiimgoem, multiimgqti partitions on UFS devices. That is handled
         //seperately.
         if (gpt_utils_is_ufs_device() && (!strncmp(ptn_swap_list[i],PTN_XBL,strlen(PTN_XBL))
+            || !strncmp(ptn_swap_list[i],PTN_XBL_CFG,strlen(PTN_XBL_CFG))
+            || !strncmp(ptn_swap_list[i],PTN_XBL_AC_CFG,strlen(PTN_XBL_AC_CFG))
+            || !strncmp(ptn_swap_list[i],PTN_TME_CFG,strlen(PTN_TME_CFG))
+            || !strncmp(ptn_swap_list[i],PTN_TME_FW,strlen(PTN_TME_FW))
+            || !strncmp(ptn_swap_list[i],PTN_TME_SEQ_PATCH,strlen(PTN_TME_SEQ_PATCH))
             || !strncmp(ptn_swap_list[i],PTN_MULTIIMGOEM,strlen(PTN_MULTIIMGOEM))
             || !strncmp(ptn_swap_list[i],PTN_MULTIIMGQTI,strlen(PTN_MULTIIMGQTI))))
             continue;
