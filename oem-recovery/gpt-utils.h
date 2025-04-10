@@ -82,11 +82,7 @@ extern "C" {
 #define PTN_XBL_CFG                     "xbl_config"
 #define PTN_MULTIIMGOEM                 "multiimgoem"
 #define PTN_MULTIIMGQTI                 "multiimgqti"
-#define PTN_TME_FW                      "tme_fw"
-#define PTN_TME_SEQ_PATCH               "tme_seq_patch"
-#define PTN_TME_CFG                     "tme_cfg"
-#define PTN_XBL_AC_CFG                  "xbl_ac_config"
-#define PTN_SWAP_LIST                   PTN_XBL, PTN_XBL_CFG, PTN_MULTIIMGOEM, PTN_MULTIIMGQTI, PTN_TME_FW, PTN_TME_SEQ_PATCH, PTN_TME_CFG, PTN_XBL_AC_CFG, "sbl1", "rpm", "tz", "aboot", "abl", "hyp", "lksecapp", "keymaster", "cmnlib", "cmnlib32", "cmnlib64", "pmic", "apdp", "devcfg", "hosd", "keystore", "msadp", "mdtp", "mdtpsecapp", "dsp", "aop", "qupfw", "vbmeta", "dtbo", "imagefv", "ImageFv", "vm-bootsys", "shrm", "cpucp", "uefi", "aop_config", "uefisecapp", "featenabler", "vendor_boot", "recovery", "qweslicstore", "xbl_ramdump", "init_boot", "cpucp_dtb", "pvmfw", "spuservice", "soccp_debug", "soccp_dcd", "pdp", "pdp_cdb", "dcp", "dcp_dtb", "secretkeeper", "soccp", "soccp_dtb", "tz_ac_config", "tz_qti_config", "vbmeta_system", "hyp_ac_config"
+#define PTN_SWAP_LIST                   PTN_XBL, PTN_XBL_CFG, PTN_MULTIIMGOEM, PTN_MULTIIMGQTI, "sbl1", "rpm", "tz", "aboot", "abl", "hyp", "lksecapp", "keymaster", "cmnlib", "cmnlib32", "cmnlib64", "pmic", "apdp", "devcfg", "hosd", "keystore", "msadp", "mdtp", "mdtpsecapp", "dsp", "aop", "qupfw", "vbmeta", "dtbo", "imagefv", "ImageFv", "vm-bootsys", "shrm", "cpucp", "uefi", "aop_config", "uefisecapp", "featenabler", "vendor_boot", "recovery", "qweslicstore", "xbl_ramdump", "init_boot", "cpucp_dtb", "pvmfw", "spuservice", "soccp_debug", "soccp_dcd", "pdp", "pdp_cdb"
 #define AB_PTN_LIST PTN_SWAP_LIST, "boot", "system", "vendor", "odm", "modem", "bluetooth"
 #define BOOT_DEV_DIR    "/dev/block/bootdevice/by-name"
 
