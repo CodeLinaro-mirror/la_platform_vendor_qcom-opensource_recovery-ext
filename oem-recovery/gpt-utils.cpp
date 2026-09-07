@@ -65,6 +65,7 @@
  * DEFINE SECTION
  ******************************************************************************/
 #define BLK_DEV_FILE    "/dev/block/mmcblk0"
+#define SDCARD_BLK_DEV_FILE    "/dev/block/mmcblk1"
 /* list the names of the backed-up partitions to be swapped */
 /* extension used for the backup partitions - tzbak, abootbak, etc. */
 #define BAK_PTN_NAME_EXT    "bak"
@@ -709,6 +710,14 @@ int gpt_utils_is_ufs_device()
                             ".ufshc",
                             sizeof(".ufshc")));
 }
+
+int gpt_utils_is_sdcard_boot()
+{
+    char is_sdcard_boot[PROPERTY_VALUE_MAX] = {0};
+    property_get("ro.boot.is_sdcard_boot", is_sdcard_boot, "0");
+    return !strncmp(is_sdcard_boot, "1", sizeof("1"));
+}
+
 //dev_path is the path to the block device that contains the GPT image that
 //needs to be updated. This would be the device which holds one or more critical
 //boot partitions and their backups. In the case of EMMC this function would
@@ -1029,9 +1038,10 @@ int prepare_boot_update(enum boot_update_stage stage)
 
 //Given a parttion name(eg: rpm) get the path to the block device that
 //represents the GPT disk the partition resides on. In the case of emmc it
-//would be the default emmc dev(/dev/block/mmcblk0). In the case of UFS we look
-//through the /dev/block/bootdevice/by-name/ tree for partname, and resolve
-//the path to the LUN from there.
+//would be the default emmc dev(/dev/block/mmcblk0), unless ro.boot.is_sdcard_boot
+//is "1", in which case it resolves to the sdcard dev(/dev/block/mmcblk1).
+//In the case of UFS we look through the /dev/block/bootdevice/by-name/ tree
+//for partname, and resolve the path to the LUN from there.
 static int get_dev_path_from_partition_name(const char *partname,
                 char *buf,
                 size_t buflen)
@@ -1058,7 +1068,11 @@ static int get_dev_path_from_partition_name(const char *partname,
                         buf[PATH_TRUNCATE_LOC] = '\0';
                 }
         } else {
-                snprintf(buf, buflen, BLK_DEV_FILE);
+                if (gpt_utils_is_sdcard_boot()) {
+                        snprintf(buf, buflen, SDCARD_BLK_DEV_FILE);
+                } else {
+                        snprintf(buf, buflen, BLK_DEV_FILE);
+                }
         }
         return 0;
 

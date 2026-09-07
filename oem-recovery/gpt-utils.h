@@ -167,6 +167,9 @@ int gpt_disk_commit(struct gpt_disk *disk);
 //Return if the current device is UFS based or not
 int gpt_utils_is_ufs_device();
 
+//Return if the device is booting from an sdcard or not
+int gpt_utils_is_sdcard_boot();
+
 //Swtich betwieen using either the primary or the backup
 //boot LUN for boot. This is required since UFS boot partitions
 //cannot have a backup GPT which is what we use for failsafe
